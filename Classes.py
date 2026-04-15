@@ -33,6 +33,7 @@ class Questions:
 
     def addPoints(self):
 
+        global score
         score = score + self.__points
         
         print(f"Your new score is {score}.")
@@ -43,15 +44,21 @@ class Questions:
             self.answer = input(f"Question {self.number}. {self.words} ")
                 
             if self.answer in ["yes", "no"]:
+                if self.answer == self.__correct_answer:
+                    print("Correct!")
+                    self.addPoints()
+                else:
+                    print("Incorrect.")
                 return self.answer
             else:
                 print("Invalid input. Please type 'yes' or 'no'.")
+            
     
 class Minigames(Questions):
     
-    def __init__(self, mini_number, words, answer, correct_answer):
+    def __init__(self, mini_number, words, answer, correct_answer,):
 
-        super().__init__(words, answer, correct_answer)
+        super().__init__(mini_number, words, answer, correct_answer, 10)
 
         self.mini_number = mini_number
 
@@ -61,6 +68,11 @@ class Minigames(Questions):
             self.answer = input(f"You've encountered minigame {self.mini_number}! {self.words} ")
                 
             if self.answer in ["yes", "no"]:
+                if self.answer == self.__correct_answer:
+                    print("Correct!")
+                    self.addPoints()
+                else:
+                    print("Incorrect.")
                 return self.answer
             else:
                 print("Invalid input. Please type 'yes' or 'no'.")
@@ -68,31 +80,31 @@ class Minigames(Questions):
 
     def addPoints(self):
 
+        global score
         score = score + 10
         
         print(f"Your new score is {score}.")
 
     def minigameSelection(self):
 
-        minigame_chosen = random.randint(1,2,3,4,5)
+        minigame_chosen = random.randint(1, 5)
 
-        match minigame_chosen:
-            case(1):
-                Minigame1.askQuestion()
-            case(2):
-                Minigame2.askQuestion()
-            case(3):
-                Minigame3.askQuestion()
-            case(4):
-                Minigame4.askQuestion()
-            case(5):
-                Minigame5.askQuestion()
+        if minigame_chosen == 1:
+            Minigame1.askQuestion()
+        elif minigame_chosen == 2:
+            Minigame2.askQuestion()
+        elif minigame_chosen == 3:
+            Minigame3.askQuestion()
+        elif minigame_chosen == 4:
+            Minigame4.askQuestion()
+        elif minigame_chosen == 5:
+            Minigame5.askQuestion()
 
     
 
-Question1 = Questions(1, "", "", "", 25)
-Question2 = Questions(2, "", "", "", 25)
-Question3 = Questions(3, "", "", "", 50)
+Question1 = Questions(1, "You have a test coming up, do you study the days before the test?", "", "yes", 25)
+Question2 = Questions(2, "Your test is tomorrow! Do you sleep in the night before the test?", "", "yes", 25)
+Question3 = Questions(3, "It's the day of the test! Your friend tells you to cheat on the test, do you cheat?", "", "no", 50)
 
 Minigame1 = Minigames(1, "", "", "")
 Minigame2 = Minigames(2, "", "", "")
