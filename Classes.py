@@ -34,7 +34,7 @@ class Questions:
     def addPoints(self):
 
         global score
-        score = score + self.__points
+        score += self.__points
         
         print(f"Your new score is {score}.")
 
@@ -95,7 +95,7 @@ class Minigames(Questions):
     def addPoints(self):
 
         global score
-        score = score + 10
+        score += 10
         
         print(f"Your new score is {score}.")
 

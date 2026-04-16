@@ -1,7 +1,7 @@
 import random
 import Classes
 
-print("Welcome to Oscar's super duper ultra mega cool educational game about tests (and some other stuff)!\nYou must travel around the map using w, a, s, and d, to reach the three main locations (1, 2 and 3) to win!\nYou can also go to minigame locations (M) to score some extra points!")
+print("Welcome to Oscar's super duper ultra mega cool educational game about tests (and some other stuff)!\nYou must travel around the map using w, a, s, and d, which moves your character (P) to reach the three main locations (1, 2 and 3) to win!\nYou can also go to minigame locations (M) to score some extra points!")
 print("")
 
 game_map = [
@@ -26,7 +26,8 @@ visited_locations = []
 for location_id in locations:
     placed = False
     while placed == False:
-        row, column = random.randint(0, 4), random.randint(0, 4)
+        row = random.randint(0, 4)
+        column = random.randint(0, 4)
         if game_map[row][column] == 0:
                 game_map[row][column] = location_id
                 placed = True
@@ -35,7 +36,8 @@ for location_id in locations:
 for M in locations:
     placed = False
     while placed == False:
-        row, column = random.randint(0, 4), random.randint(0, 4)
+        row = random.randint(0, 4)
+        column = random.randint(0, 4)
         if game_map[row][column] == 0:
                 game_map[row][column] = 'M'
                 placed = True
@@ -55,7 +57,8 @@ for row in range(5):
 #Movement Loop
 while True:
     #Takes users input to move, little tail on the end allows them to use capitals letters and it will still work!
-    move = input("\nMove (w/a/s/d): ").lower()
+    print("")
+    move = input("Move (w/a/s/d): ").lower()
     print("")
 
     #Store old position to clear it
@@ -77,21 +80,21 @@ while True:
     
     #Asks the questions
     if destination in [1, 2, 3]:
+        
         #Puts to location in in the "visited_locations" array so that we can trigger the win condition
-        if destination not in visited_locations:
-            visited_locations.append(destination)
+        visited_locations.append(destination)
 
-            print(f"You found location {destination}!")
-            print("")
+        print(f"You found location {destination}!")
+        print("")
 
-            if destination == 1:
-                Classes.Question1.askQuestion()
+        if destination == 1:
+            Classes.Question1.askQuestion()
             
-            elif destination == 2:
-                Classes.Question2.askQuestion()
+        elif destination == 2:
+            Classes.Question2.askQuestion()
 
-            elif destination == 3:
-                Classes.Question3.askQuestion()
+        elif destination == 3:
+            Classes.Question3.askQuestion()
 
     #Begins a minigame
     elif destination == 'M':
